@@ -52,7 +52,7 @@ class GameWonFragment : Fragment() {
 
     private fun getShareIntent() : Intent {
         val args = GameWonFragmentArgs.fromBundle(requireArguments())
-        return ShareCompat.IntentBuilder.from(activity!!)
+        return ShareCompat.IntentBuilder.from(activity!!)   //
                 .setText(getString(R.string.share_success_text, args.numCorrect, args.numQuestions))
                 .setType("text/plain")
                 .intent
@@ -66,8 +66,9 @@ class GameWonFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.winner_menu, menu)
         // check if the activity resolves
-        if (null == getShareIntent().resolveActivity(requireActivity().packageManager)) {
-            // hide the menu item if it doesn't resolve
+        if (null == getShareIntent().resolveActivity(requireActivity().packageManager)) {  // the packageManager knows all the activities registered in the android manifest
+                                                                                            // and across all the apps
+            // hide the menu item if it doesn't resolve and there is no app that can carry out the intent
             menu.findItem(R.id.share)?.isVisible = false
         }
     }

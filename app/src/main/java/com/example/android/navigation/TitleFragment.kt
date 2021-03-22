@@ -36,17 +36,26 @@ class TitleFragment : Fragment() {
         val binding: FragmentTitleBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_title, container, false)
         binding.playButton.setOnClickListener { v: View ->
-            v.findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
+            v.findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())   // here the navigating to the game fragment from the play or the main screen
+
         }
-        setHasOptionsMenu(true)
+        setHasOptionsMenu(true)  // we are telling the  app that there would be a menu associated with the title bar
+
         return binding.root
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+        super.onCreateOptionsMenu(menu, inflater)   // we need to override onCreateOptionsMenu and inflate our new menu resource using the provided menu inflater and menu structure
         inflater.inflate(R.menu.overflow_menu, menu)
     }
 
+    /*
+    the following function is called when a item from the menu is selected
+    and navigates us to the next fragment(about fragment in our case)
+
+
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
                 || super.onOptionsItemSelected(item)
